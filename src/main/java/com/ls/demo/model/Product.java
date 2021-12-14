@@ -24,6 +24,9 @@ public class Product {
     @Column(nullable = false, name = "price")
     private double price;
 
+    @Column(nullable = false, name = "max_discount")
+    private double maxDiscount;
+
     public int getId() {
         return id;
     }
@@ -44,6 +47,10 @@ public class Product {
         return supplier;
     }
 
+    public double getMaxDiscount() {
+        return maxDiscount;
+    }
+
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
@@ -54,5 +61,16 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setMaxDiscount(double maxDiscount) {
+        this.maxDiscount = maxDiscount;
+    }
+
+    public double getPriceWithDiscount(double discount) {
+        if (discount > maxDiscount)
+            return price - (price * maxDiscount);
+        else
+            return price - (price * discount);
     }
 }
